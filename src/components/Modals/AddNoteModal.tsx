@@ -1,29 +1,25 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
-import {
-  Modal,
-  Box,
-  TextField,
-  Button,
-  Fab,
-} from "@mui/material";
+import { Modal, Box, TextField, Button, Fab } from "@mui/material";
 import { Add as AddIcon } from "@mui/icons-material";
+import { useNotes } from "../../providers/NotesContext";
 
-export default function AddNoteModal({ onAdd }: { onAdd: (title: string, category: string, details: string) => void }) {
-const [open, setOpen] = useState(false);
-const [title, setTitle] = useState("");
-const [category, setCategory] = useState("");
-const [details, setDetails] = useState("");
+export default function AddNoteModal() {
+  const { addNote } = useNotes(); // Use notes context
+  const [open, setOpen] = useState(false);
+  const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("");
+  const [details, setDetails] = useState("");
 
-const handleSubmit = () => {
-if (title && category && details) {
-    onAdd(title, category, details);
-    setTitle("");
-    setCategory("");
-    setDetails("");
-    setOpen(false);
-}
-};
+  const handleSubmit = () => {
+    if (title.trim() && category.trim() && details.trim()) {
+      addNote({ id: Date.now(), title, category, details });
+      setTitle("");
+      setCategory("");
+      setDetails("");
+      setOpen(false);
+    }
+  };
 
   return (
     <>
@@ -81,7 +77,7 @@ if (title && category && details) {
               </Button>
             </Box>
           </Modal>,
-          document.body // Mounts the modal outside the main component tree
+          document.body
         )}
     </>
   );

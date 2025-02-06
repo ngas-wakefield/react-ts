@@ -4,6 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import { IconButton, Typography, Avatar } from "@mui/material";
 import { DeleteOutlineOutlined } from "@mui/icons-material";
 import { yellow, green, pink, blue } from "@mui/material/colors";
+import { useNotes } from "../../providers/NotesContext";
 
 const avatarStyle = (category: string) => ({
   backgroundColor:
@@ -24,6 +25,8 @@ export interface Note {
 }
 
 export default function NoteCard({ n }: { n: Note }) {
+  const { deleteNote } = useNotes(); // Get delete function from context
+
   return (
     <Card elevation={3}>
       <CardHeader
@@ -33,7 +36,7 @@ export default function NoteCard({ n }: { n: Note }) {
           </Avatar>
         }
         action={
-          <IconButton onClick={() => console.log(`Delete note ${n.id}`)}>
+          <IconButton onClick={() => deleteNote(n.id)}>
             <DeleteOutlineOutlined />
           </IconButton>
         }

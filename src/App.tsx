@@ -2,17 +2,21 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Login from "./pages/Login";
 import Notes from "./pages/Notes";
+import { NotesProvider } from "./providers/NotesContext";
 
 const App = () => {
   return (
-    <Router>
-      <Header />
-      <Notes />
-      <Routes>
-        <Route path="/" element={<h2>Home Page</h2>} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
-    </Router>
+    <NotesProvider>
+      <Router>
+        <Header />
+        <main style={{ paddingTop: "64px" }}> {/* Adjust based on header height */}
+        <Routes>
+          <Route path="/" element={<Notes />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+        </main>
+      </Router>
+    </NotesProvider>
   );
 };
 

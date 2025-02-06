@@ -1,4 +1,3 @@
- 
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
@@ -20,7 +19,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AddNoteModal from "../Modals/AddNoteModal";
- 
+
 
 
 const Header = () => {
@@ -45,13 +44,10 @@ const Header = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>My App</Typography>
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>Ngahine Notes App</Typography>
 
           {/* Floating Add Note Button in Header */}
-          <AddNoteModal onAdd={(title, category, details) => {
-            // Use the title, category, and details parameters here
-            console.log(`Adding note: ${title} (${category}) - ${details}`);
-          }} />
+          <AddNoteModal/>
         </Toolbar>
       </AppBar>
 

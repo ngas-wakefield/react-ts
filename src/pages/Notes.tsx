@@ -1,16 +1,27 @@
-import { Container, Typography } from "@mui/material";
+import { Container, Typography} from "@mui/material";
+import { useAuth } from "../hooks/useAuth";
 import NotesGrid from "../components/NotesGrid/NotesGrid";
-import { notes } from "../data/db";
-import { Note } from "../components/NoteCard/NoteCard";
+import AddNoteModal from "../components/Modals/AddNoteModal";
 
 export default function Notes() {
-  const notesArray: Note[] = notes;
+  const { isAuthenticated } = useAuth();
+
+  if (!isAuthenticated) {
+    return (
+      <Container>
+        <Typography variant="h5" gutterBottom>
+          You need to log in to view your notes.
+        </Typography>
+      </Container>
+    );
+  }
+
   return (
     <Container>
       <Typography variant="h4" gutterBottom>
-        Notes
       </Typography>
-      <NotesGrid notes={notesArray} />
+      <AddNoteModal />
+      <NotesGrid />
     </Container>
   );
 }
