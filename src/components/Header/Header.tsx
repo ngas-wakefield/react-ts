@@ -1,6 +1,7 @@
+ 
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../../hooks/useAuth";
 import { 
   Drawer, 
   List, 
@@ -18,6 +19,9 @@ import HomeIcon from "@mui/icons-material/Home";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import AddNoteModal from "../Modals/AddNoteModal";
+ 
+
 
 const Header = () => {
   const { isAuthenticated, logout, login, user } = useAuth();
@@ -30,7 +34,7 @@ const Header = () => {
 
   return (
     <>
-      {/* Top AppBar for Mobile */}
+      {/* Top AppBar */}
       <AppBar position="fixed" sx={{ zIndex: 1300 }}>
         <Toolbar>
           <IconButton 
@@ -41,16 +45,18 @@ const Header = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6">My App</Typography>
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>My App</Typography>
+
+          {/* Floating Add Note Button in Header */}
+          <AddNoteModal onAdd={(title, category, details) => {
+            // Use the title, category, and details parameters here
+            console.log(`Adding note: ${title} (${category}) - ${details}`);
+          }} />
         </Toolbar>
       </AppBar>
 
       {/* Sidebar Drawer */}
-      <Drawer 
-        anchor="left" 
-        open={open} 
-        onClose={handleClose}  // Ensures the drawer closes on outside click
-      >
+      <Drawer anchor="left" open={open} onClose={handleClose}>
         <List sx={{ width: 250 }}>
           <ListItem disablePadding>
             <ListItemButton component={Link} to="/" onClick={handleClose}>
