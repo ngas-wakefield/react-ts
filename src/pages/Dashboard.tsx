@@ -26,7 +26,7 @@ const Dashboard: React.FC = () => {
             <h2>Fetched Data:</h2>
             <pre>{JSON.stringify(data, null, 2)}</pre>
           </div>
-          <button onClick={() => logout({ returnTo: window.location.origin })}>Log out</button>
+          <button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Log out</button>
         </>
       ) : (
         <button onClick={() => loginWithRedirect()}>Log in</button>
